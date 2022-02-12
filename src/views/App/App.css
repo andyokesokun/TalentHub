@@ -1,0 +1,193 @@
+.container {
+  display: flex;
+}
+
+.w-fit {
+  width: fit-content;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+li.nav-link {
+  list-style: none;
+}
+
+.pr-2 {
+  padding-right: 0.6rem;
+}
+
+.nav-link a {
+  text-decoration: none;
+  color: #0b34a5;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.margin-right {
+  margin-right: 10px;
+}
+
+.margin-left {
+  margin-left: 10px;
+}
+
+.icon {
+  color: #0b34a5;
+}
+
+.site-title {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: 1px solid;
+}
+
+.margin-none {
+  margin: none;
+}
+
+.margin-top {
+  margin-top: 20px;
+}
+
+.margin-bottom {
+  margin-top: 20px;
+}
+
+.d-none {
+  display: none;
+}
+
+.margin {
+  margin: 20px;
+}
+
+.form-holder {
+  padding: 20px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-primary {
+  background-color: unset;
+}
+
+.btn {
+  background-color: unset;
+  border: 1px solid #53535317;
+  color: blue;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
+}
+
+.bg-gray {
+  background-color: #8a8a8a;
+}
+
+.bg-blue {
+  background-attachment: #0b34a5;
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.bg-red {
+  background-color: #818100d5;
+}
+
+.color-white {
+  color: #fff;
+}
+
+.color-red {
+  color: #818100d5;
+}
+
+a.btn-link {
+  text-decoration: none;
+  padding: 0.4rem 0.4rem;
+}
+
+.pb {
+  padding-bottom: 10px;
+}
+
+.back {
+  background-color: red;
+  width: fit-content;
+}
+
+.text-decoration {
+  text-decoration: none;
+}
+
+.justify {
+  justify-content: center;
+  align-content: center;
+}
+
+.round {
+  width: 150px;
+  height: 150px;
+  border: 0.2rem solid #9088a8;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 0.3rem;
+}
+
+.round .img {
+  width: 100%;
+  height: 100%;
+}
+
+.close-btn {
+  font-size: 0.6rem;
+  color: #8a8a8a;
+  opacity: 0.2;
+}
+
+.close-btn:hover {
+  opacity: 0.6;
+}
+
+.display-6 {
+  font-size: calc(1.1rem + 1.2vw);
+  font-weight: 200;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 80px;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  padding-left: 20px;
+  margin-bottom: 5rem;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+/*# sourceMappingURL=App.css.map */
