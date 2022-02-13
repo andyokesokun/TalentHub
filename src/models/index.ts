@@ -53,7 +53,7 @@ interface  WorkExperience extends BaseField{
 
  }
 
- export interface Profile{
+ export interface Profile extends BaseField{
     first_name: string,
     last_name: string,
     preferred_name: string,
@@ -74,8 +74,12 @@ interface  WorkExperience extends BaseField{
      items: Array<Profile>
      fetchedNew? : boolean
 
-
  }
+
+ export interface ItemsPerPage{
+    value : number
+ }
+
 
 
 

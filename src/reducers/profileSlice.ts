@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { profile } from "console";
-import { Profile, Profiles } from "../models"
+import { ItemsPerPage, Profile, Profiles } from "../models"
 import { AppState } from "../store";
 
 const initalState ={
@@ -12,11 +12,8 @@ const initalState ={
     previousPage: "",
     totalRecords: 0,
     showPerPage: 5,
-    pageNum: 1,
-    itemStart: 1,
-    itemEnd:  5,
     hasData: false, 
-    fetchedNew: false, 
+
 
 }
 
@@ -28,52 +25,34 @@ const profileSlice = createSlice({
     reducers:{
         addProfiles: (state, action: PayloadAction<Profiles | null > ) =>{   
             
-              if(!state.hasData && action.payload !=null){
+              if(action.payload !=null){
                     var profiles = action.payload as Profiles
                     state.profiles.push(...profiles.items)
+                    
+                    state.previousPage = state.nextPage
                     state.nextPage =profiles.next
+
                     state.totalRecords =  state.totalRecords + profiles.items.length
-                
-                    state.pagedProfiles.push(...addNextProfilesToPagedList(state))
-                    state.hasData = true
-              }
-              
+                    state.hasData =true
+              }             
               
         },
-        nextProfiles:(state, action: PayloadAction<Profiles | null >) =>{
-            //we fetched new data from the api
-            if(action.payload !=null){
-                var profiles = action.payload as Profiles
-                state.profiles.push(...profiles.items)
-                
-                state.previousPage =  state.nextPage
-                state.nextPage =profiles.next
-                   
-                state.hasData = true
-            
-            }
-            
-            var nextPage = (state.pageNum + 1);
-            state.pageNum =  nextPage
-            //begining of the next Page Item index + 1
-            state.itemStart = state.itemEnd
-            //end of the nextPage Item 
-            state.itemEnd = nextPage * state.showPerPage  
-            
-
-            state.pagedProfiles.push(...addNextProfilesToPagedList(state)) 
-            
+        changeShowPerPage: (state, action:PayloadAction<ItemsPerPage> ) => {
+              var showPerPage = action.payload.value;
+              if(showPerPage >  10){
+                 showPerPage = 10
+              }else{
+                  state.showPerPage = showPerPage
+              }
+          
 
         }
-     
+
     }
 })
 
-export  const {addProfiles,nextProfiles} = profileSlice.actions
+export  const {addProfiles,changeShowPerPage} = profileSlice.actions
 
 export type ProfileType  = typeof initalState
-
-const addNextProfilesToPagedList = (state: ProfileType) => 
-                    (state.profiles.filter((x,i)  =>  i > (state.itemStart - 1) && i < (state.itemEnd - 1)   ) )
 
 export default profileSlice.reducer;

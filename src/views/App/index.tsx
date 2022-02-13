@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import ProfileList from '../../components/ProfileList';
+import ProfileListComponent from '../../components/ProfileList';
+import HomeView from '../HomeView'
 import { Provider } from 'react-redux';
 import store from '../../store'
 
@@ -17,7 +18,7 @@ function App() {
         </header>
         
         <section className='container w-80 m-auto'>
-           <ProfileList></ProfileList>
+           <HomeView />
         </section>
       
 

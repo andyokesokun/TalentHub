@@ -1,30 +1,32 @@
 import './index.css'
-import { Profiles } from "../../models";
-import ProfileService from "../../services/profileService";
+import { Profile } from "../../models";
 import ProfileComponent from "../Profile";
-import {Button} from 'react-bootstrap'
+import { useStore } from 'react-redux';
+import { useState } from 'react';
+import { JsxElement } from 'typescript';
 
 
-const ProfileList = () => {
+ interface ProfileListProp{
+     profiles: Array<Profile>
+}
+const ProfileListComponent: React.FC<ProfileListProp> = ({profiles}) => {
    
-    var profiles = ProfileService.getProfiles();
+    
 
     return(
         <div>
             <div className="d-flex flex-row flex-wrap">
                 
                 {profiles.length > 0 ?
-                profiles.map(x => <div className ="profile"> <ProfileComponent  {...x} /></div> )
-                :<p className="centered m-4 text-danger">No Data</p>
+                profiles.map(x => <div className ="profile" key={x.uuid} > <ProfileComponent  profile={x}  /></div> )
+                :<p className="centered m-4 text-danger" >No Data</p>
                 }
 
             </div>
-            
-            {profiles.length > 0 && <Button className='centered' >Show More</Button> }
         </div>
      
      
     )
 }
 
-export default ProfileList
+export default ProfileListComponent
