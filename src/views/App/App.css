@@ -190,4 +190,13 @@ p {
   color: #61dafb;
 }
 
+.activeNav {
+  background: gold;
+  border-radius: 20%;
+}
+
+.activeNav a {
+  color: white;
+}
+
 /*# sourceMappingURL=App.css.map */
