@@ -18,3 +18,6 @@ export const usePagination = (startPage: number) =>{
 
     return {currentPageNum,nextPage}
 } 
+
+
+
