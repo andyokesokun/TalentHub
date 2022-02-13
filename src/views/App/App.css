@@ -179,8 +179,6 @@ p {
 .App-header {
   background-color: #282c34;
   min-height: 80px;
-  display: flex;
-  flex-direction: row;
   color: white;
   padding-left: 20px;
   margin-bottom: 5rem;

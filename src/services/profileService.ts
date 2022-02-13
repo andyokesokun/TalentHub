@@ -42,9 +42,18 @@ class ProfileService{
     static getProfiles = (pageNum: number): Array<Profile> => {
          var profiles = useAppSelector(  (state) => state.profileSlice.profiles )    
          var itemsPerPage = useAppSelector( (state) => state.profileSlice.showPerPage )
+         var searchValue = useAppSelector( (state) => state.profileSlice.searchValue )
 
          //end of the nextPage Item 
          var itemEnd = ( pageNum * itemsPerPage);
+       
+         if(searchValue){
+             return profiles.filter((x,i)  =>  i < itemEnd 
+                         || x.preferred_job_title == searchValue 
+                         || x.city == searchValue
+                         || x.country == searchValue
+                         || x.edges.work_experiences.length.toString() == searchValue  )   
+         }
          return profiles.filter((x,i)  =>  i < itemEnd  )
         
     }
