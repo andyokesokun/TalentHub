@@ -23,8 +23,10 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   AnyAction
 >
 
+if(!store.getState().profileSlice.hasData){
+    store.dispatch(ProfileService.fetchAndSaveToStore())
+}
 
-store.dispatch(ProfileService.fetchAndSaveToStore())
 
 function checkStoreData(){
     console.log(store.getState().profileSlice.profiles );

@@ -1,10 +1,11 @@
 import { request } from "../utils"
 import {Profile,Profiles} from  "../models"
 import { AnyAction, Dispatch, Store } from "redux";
-import {addProfiles,nextProfiles} from '../reducers/profileSlice'
+import {addProfiles} from '../reducers/profileSlice'
 import { ThunkAction } from "redux-thunk";
 import { AppState } from "../store";
 import { useAppSelector } from "../hooks";
+import { useSelector } from "react-redux";
 
 
 
@@ -38,26 +39,36 @@ class ProfileService{
         } 
     }
 
-    static getProfiles = (): Array<Profile> => {
-          return useAppSelector(  (state) => state.profileSlice.pagedProfiles )
+    static getProfiles = (pageNum: number): Array<Profile> => {
+         var profiles = useAppSelector(  (state) => state.profileSlice.profiles )    
+         var itemsPerPage = useAppSelector( (state) => state.profileSlice.showPerPage )
+
+         //end of the nextPage Item 
+         var itemEnd = ( pageNum * itemsPerPage);
+         return profiles.filter((x,i)  =>  i < itemEnd  )
         
     }
 
     
-    static getNextProfiles = (): ThunkAction<void, AppState, unknown, AnyAction> =>  {   
-      
-        return async dispatch => {
-            
-            var lastItemIndex = useAppSelector(  (state) => state.profileSlice.itemEnd )
-            var currentTotalItems = useAppSelector(  (state) => state.profileSlice.totalRecords )
-            var nextpage = useAppSelector(  (state) => state.profileSlice.nextPage )
+    static getNextProfiles = (pageNum: number): ThunkAction<void, AppState, unknown, AnyAction> =>  {   
+              
+        return async (dispatch, getCurrentState) => {
+                 
 
-            var profileList: Profiles | null 
+        var currentTotalItems =getCurrentState().profileSlice.totalRecords;
+        var itemsPerPage = getCurrentState().profileSlice.showPerPage;
+        var nextPage = getCurrentState().profileSlice.nextPage;
+
+        var itemEnd = ( pageNum * itemsPerPage); 
+ 
+        var profileList: Profiles | null 
            
             //we need to fetch more data from the API
-            if(lastItemIndex == currentTotalItems){
-                profileList=await  this.fetchProfiles(nextpage)
-                dispatch(nextProfiles(profileList) );
+            console.log('endEnd',itemEnd)
+            console.log('currentTotalItems',currentTotalItems)
+            if( (itemEnd > currentTotalItems) ){
+                profileList=await  this.fetchProfiles(nextPage)
+                dispatch(addProfiles(profileList) );
             }
             
          }  
