@@ -81,6 +81,11 @@ interface  WorkExperience extends BaseField{
  }
 
 
+ export interface SearchItem{
+    value : string
+ }
+
+
 
 
 

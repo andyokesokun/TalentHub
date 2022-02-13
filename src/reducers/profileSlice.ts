@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { profile } from "console";
-import { ItemsPerPage, Profile, Profiles } from "../models"
+import { ItemsPerPage, Profile, Profiles, SearchItem } from "../models"
 import { AppState } from "../store";
 
 const initalState ={
@@ -13,6 +13,7 @@ const initalState ={
     totalRecords: 0,
     showPerPage: 5,
     hasData: false, 
+    searchValue :""
 
 
 
@@ -45,14 +46,16 @@ const profileSlice = createSlice({
               }else{
                   state.showPerPage = showPerPage
               }
-          
-
-        }
-
+    
+        },
+       addSearchValue: (state, action:PayloadAction<SearchItem> ) => {
+               state.searchValue =  action.payload.value;    
+      }
+        
     }
 })
 
-export  const {addProfiles,changeShowPerPage} = profileSlice.actions
+export  const {addProfiles,changeShowPerPage,addSearchValue} = profileSlice.actions
 
 export type ProfileType  = typeof initalState
 
