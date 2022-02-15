@@ -47,12 +47,18 @@ class ProfileService{
          //end of the nextPage Item 
          var itemEnd = ( pageNum * itemsPerPage);
        
+    
          if(searchValue){
-             return profiles.filter((x,i)  =>  i < itemEnd 
-                         || x.preferred_job_title == searchValue 
-                         || x.city == searchValue
-                         || x.country == searchValue
-                         || x.edges.work_experiences.length.toString() == searchValue  )   
+            console.log(searchValue)
+              
+             var data= [...(profiles.filter((x)  =>
+                          x.preferred_job_title.toLowerCase().includes(searchValue.toLowerCase())
+                          || x.country.toLowerCase().includes(searchValue.toLowerCase())
+                          || x.city.toLowerCase().includes(searchValue.toLowerCase())
+                          || x.edges.work_experiences.length >= parseInt(searchValue.toLowerCase())
+                          ) )]
+                          
+            return data.filter( (x,i) => i < itemEnd)
          }
          return profiles.filter((x,i)  =>  i < itemEnd  )
         

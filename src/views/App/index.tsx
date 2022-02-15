@@ -30,8 +30,9 @@ const App: React.FC = (props) => {
 
   const search = () => {
     var value = searchFormEle.current?.value
+  
     if (value != null) {
-      dispatch(addSearchValue({ value} as SearchItem))
+        dispatch(addSearchValue({ value} as SearchItem))
     }
 
   }
