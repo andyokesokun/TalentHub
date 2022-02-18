@@ -27,8 +27,8 @@ const profileSlice = createSlice({
                     var profiles = action.payload as Profiles
                     
                     for(var p of profiles.items){  
-                            p.savedbyUser = false;
                             state.profiles.set(p.uuid, p)
+                            p.deleted  = false
                         }                 
                                
                     state.previousPage = state.nextPage
@@ -56,16 +56,28 @@ const profileSlice = createSlice({
           var uuid = action.payload.profileId;
           var profile = state.profiles.get(uuid)        
           if(profile ){     
-                profile.savedbyUser = true       
+                profile.savedbyUser = true   
+                profile.deleted = false     
                 state.profiles.set(profile.uuid, profile)
            }
              
-      }
+      },
+      removeProfile: (state, action:PayloadAction<ProfileId> ) => {           
+        var uuid = action.payload.profileId;
+        var profile = state.profiles.get(uuid)
+        console.log("inside");
+        if(profile ){     
+              profile.deleted = true  
+              profile.savedbyUser = false        
+              state.profiles.set(profile.uuid, profile)
+         }
+           
+    }
         
     }
 })
 
-export  const {addProfiles,changeShowPerPage,addSearchValue, saveProfile } = profileSlice.actions
+export  const {addProfiles,changeShowPerPage,addSearchValue, saveProfile,removeProfile } = profileSlice.actions
 
 export type ProfileType  = typeof initalState
 

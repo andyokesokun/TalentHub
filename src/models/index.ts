@@ -65,7 +65,8 @@ interface  WorkExperience extends BaseField{
     country: string,
     city: string,
     edges: Edge,
-    savedbyUser : boolean
+    savedbyUser : boolean,
+    deleted : boolean
     
 
  }
