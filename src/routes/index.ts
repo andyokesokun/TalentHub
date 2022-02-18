@@ -12,11 +12,17 @@ import { PageNameConst } from "../constants";
 
       },
       {
-        path :"/savedProfiles",
+        path :"/saved-profiles",
         Component: ProfileView,
-        prop : {pageName: PageNameConst.SAVEPROFILE} as ProfileViewProp
+        prop : {pageName: PageNameConst.SAVEDPROFILE} as ProfileViewProp
 
       },
+      {
+        path :"/deleted-profiles",
+        Component: ProfileView,
+        prop : {pageName: PageNameConst.DELETEDPROFILE} as ProfileViewProp
+
+      }
 
 ] 
 

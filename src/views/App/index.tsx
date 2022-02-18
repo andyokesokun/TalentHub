@@ -15,21 +15,20 @@ const App: React.FC = (props) => {
 
   const location = useLocation()
   const currentItemPerPage = useAppSelector(state => state.profileSlice.showPerPage)
-  const itemPerPagSelEle = useRef<HTMLSelectElement>(null)
-  const searchFormEle = useRef<HTMLInputElement>(null)
+
   const dispatch = useAppDispatch()
 
-  const changeItemPerPage = () => {
+  const changeItemPerPage = (event: React.ChangeEvent<HTMLSelectElement>) => {
 
-    var value = itemPerPagSelEle.current?.value
+    var value = (event.currentTarget as HTMLSelectElement).value
     if (value != null) {
       dispatch(changeShowPerPage({ value: parseInt(value) } as ItemsPerPage))
     }
 
   }
 
-  const search = () => {
-    var value = searchFormEle.current?.value
+  const search = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    var value = (event.currentTarget as HTMLInputElement).value
   
     if (value != null) {
         dispatch(addSearchValue({ value} as SearchItem))
@@ -47,7 +46,7 @@ const App: React.FC = (props) => {
           <p className="lead">We have the right talent just for you</p>
         </div>
         <div className="d-flex">
-          <Form.Select size="lg" ref={itemPerPagSelEle} onChange={changeItemPerPage} >
+          <Form.Select size="lg"   onChange={changeItemPerPage} >
             {new Array(10).fill(0).map((_, i) => {
               var item = i + 1
               if (currentItemPerPage == item) {
@@ -57,7 +56,7 @@ const App: React.FC = (props) => {
             })
             }
           </Form.Select>
-          <Form.Control size="lg" ref ={searchFormEle} type="text" onKeyUp={search} placeholder="Search by job title, years of experience, city, country" />
+          <Form.Control size="lg" type="text" onKeyUp={search} placeholder="Search by job title, years of experience, city, country" />
 
         </div>
       </header>

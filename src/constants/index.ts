@@ -1,4 +1,5 @@
 export const PageNameConst = {
     HOMEPAGE : 'home',
-    SAVEPROFILE : 'saveProfile'
+    SAVEDPROFILE : 'Saved Profiles',
+    DELETEDPROFILE : 'Deleted Profiles'
 }

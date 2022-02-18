@@ -42,7 +42,8 @@ class ProfileService{
 
     static getProfiles = (pageNum: number): Array<Profile> => {
         
-         const {profiles,searchValue,itemEnd} = ProfileService.getStateValue(pageNum)       
+         var {profiles,searchValue,itemEnd} = ProfileService.getStateValue(pageNum)  
+         profiles = profiles.filter(s => !s.deleted )    
          var searchResult = ProfileService.search(searchValue, profiles, itemEnd)
          return    searchResult.length >  0 ? searchResult : profiles.filter((x,i)  =>  i < itemEnd  )
         
@@ -74,6 +75,14 @@ class ProfileService{
     
     } 
 
+    static deletedProfiles = (pageNum: number) : Array<Profile> => {     
+        const {profiles,searchValue,itemEnd} = ProfileService.getStateValue(pageNum)
+        var deletedProfiles = profiles.filter(s => s.deleted == true )
+        var searchResult = ProfileService.search(searchValue, deletedProfiles , itemEnd)
+        return  searchResult.length >  0 ? searchResult : deletedProfiles.filter((x,i)  =>  i < itemEnd  )
+
+} 
+
     static getStateValue  = (pageNum: number) =>{
         var profiles =Array.from(useAppSelector(  (state) => state.profileSlice.profiles).values())
         var itemsPerPage = useAppSelector( (state) => state.profileSlice.showPerPage )
@@ -87,8 +96,10 @@ class ProfileService{
     static getProfileHandler = (pageName: string,currentPageNum: number) =>{
 
         switch(pageName){
-            case PageNameConst.SAVEPROFILE :
+            case PageNameConst.SAVEDPROFILE :
                 return ProfileService.savedProfiles(currentPageNum);
+            case PageNameConst.DELETEDPROFILE :
+                    return ProfileService.deletedProfiles(currentPageNum);
             default:
                 return ProfileService.getProfiles(currentPageNum)
         }
