@@ -64,7 +64,9 @@ interface  WorkExperience extends BaseField{
     phone: string,
     country: string,
     city: string,
-    edges: Edge
+    edges: Edge,
+    savedbyUser : boolean
+    
 
  }
 
@@ -72,7 +74,7 @@ interface  WorkExperience extends BaseField{
      total: number,
      next: string,
      items: Array<Profile>
-     fetchedNew? : boolean
+
 
  }
 
@@ -85,6 +87,13 @@ interface  WorkExperience extends BaseField{
     value : string
  }
 
+export interface ProfileViewProp{
+    pageName: string  
+}
+
+export interface ProfileId{
+   profileId: string
+}
 
 
 

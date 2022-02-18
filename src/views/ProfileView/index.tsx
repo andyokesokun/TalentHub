@@ -2,17 +2,19 @@ import ProfileService from "../../services/profileService";
 import {Button} from 'react-bootstrap'
 import { useAppDispatch, usePagination } from '../../hooks';
 import ProfileListComponent from '../../components/ProfileList';
+import { ProfileViewProp } from "../../models";
 
 
-const HomeView = () => {
+
+const ProfileView: React.FC<ProfileViewProp> = ({pageName}) => {
    
     var {currentPageNum, nextPage} = usePagination(1);
-    var profiles = ProfileService.getProfiles(currentPageNum)
+    var profiles = ProfileService.getProfileHandler(pageName, currentPageNum)
    
-    console.log('profiles',profiles)
+    console.log('pageType',pageName)
     var dispatch = useAppDispatch()
-
     
+
 
     const showMore = () => {
         var nextValue = currentPageNum  + 1
@@ -33,4 +35,4 @@ const HomeView = () => {
     )
 }
 
-export default HomeView
+export default ProfileView

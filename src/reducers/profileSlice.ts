@@ -1,20 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { profile } from "console";
-import { ItemsPerPage, Profile, Profiles, SearchItem } from "../models"
+import { ItemsPerPage, Profile, Profiles, SearchItem,ProfileId } from "../models"
 import { AppState } from "../store";
 
 const initalState ={
-    profiles: Array<Profile>(),
-    savedProfiles : Array<Profile>(),
-    removedProfiles: Array<Profile>(),
-    pagedProfiles:  Array<Profile>(),
+    profiles: new Map<string,Profile>(),
     nextPage: "",
     previousPage: "",
     totalRecords: 0,
     showPerPage: 5,
     hasData: false, 
     searchValue :""
-
 
 
 }
@@ -29,8 +25,12 @@ const profileSlice = createSlice({
             
               if(action.payload !=null){
                     var profiles = action.payload as Profiles
-                    state.profiles.push(...profiles.items)
                     
+                    for(var p of profiles.items){  
+                            p.savedbyUser = false;
+                            state.profiles.set(p.uuid, p)
+                        }                 
+                               
                     state.previousPage = state.nextPage
                     state.nextPage =profiles.next
 
@@ -50,12 +50,22 @@ const profileSlice = createSlice({
         },
        addSearchValue: (state, action:PayloadAction<SearchItem> ) => {
                state.searchValue =  action.payload.value;    
+      },
+
+       saveProfile: (state, action:PayloadAction<ProfileId> ) => {           
+          var uuid = action.payload.profileId;
+          var profile = state.profiles.get(uuid)        
+          if(profile ){     
+                profile.savedbyUser = true       
+                state.profiles.set(profile.uuid, profile)
+           }
+             
       }
         
     }
 })
 
-export  const {addProfiles,changeShowPerPage,addSearchValue} = profileSlice.actions
+export  const {addProfiles,changeShowPerPage,addSearchValue, saveProfile } = profileSlice.actions
 
 export type ProfileType  = typeof initalState
 
