@@ -6,8 +6,10 @@ import { useAppDispatch } from '../hooks';
 import { configureStore } from '@reduxjs/toolkit';
 
 
-
-var store =  configureStore({reducer});
+var store =  configureStore(
+              {reducer, 
+                 middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false})
+               });
 
 
 export  default store;

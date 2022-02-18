@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import ProfileListComponent from '../../components/ProfileList';
-import HomeView from '../HomeView'
-import { Route, Routes, useLocation } from 'react-router-dom';
+import ProfileView from '../ProfileView'
+import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import store from '../../store'
 import routes from '../../routes'
 import { Nav, Form } from 'react-bootstrap'
@@ -66,10 +66,10 @@ const App: React.FC = (props) => {
         <Nav
           activeKey="/home"
         >
-          {routes.map(({ path }, key) => (
+          {routes.map(({ path, prop }, key) => (
 
             <Nav.Item key={key} className={location.pathname == path ? 'activeNav' : ''} >
-              <Nav.Link href={path}>Home</Nav.Link>
+               <Link  className="nav-link" to={path}>{prop.pageName.toUpperCase()}</Link>
             </Nav.Item>
 
           )
@@ -81,8 +81,8 @@ const App: React.FC = (props) => {
       <section className='container w-80 m-auto'>
 
         <Routes>
-          {routes.map(({ Component, path, ...others }, key) =>
-            <Route key={key} path={path} element={<Component {...others} />} />)}
+          {routes.map(({ Component, path, prop}, key) =>
+            <Route key={key} path={path} element={<Component {...prop} />} />)}
 
         </Routes>
 
