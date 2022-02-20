@@ -12,6 +12,9 @@
 .social-Link {
   margin: 0.4rem;
 }
+.social-Link .icon {
+  color: #252525;
+}
 
 .card .icon {
   width: 20px;

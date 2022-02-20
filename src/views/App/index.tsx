@@ -29,9 +29,9 @@ const App: React.FC = (props) => {
 
   const search = (event: React.KeyboardEvent<HTMLInputElement>) => {
     var value = (event.currentTarget as HTMLInputElement).value
-  
+
     if (value != null) {
-        dispatch(addSearchValue({ value} as SearchItem))
+      dispatch(addSearchValue({ value } as SearchItem))
     }
 
   }
@@ -41,34 +41,35 @@ const App: React.FC = (props) => {
 
     <div className="App">
       <header className="App-header">
-        <div className='d-flex flex-column'>
+        <div className='fit-content float-left'>
           <p className="display-6">Talent Hub</p>
           <p className="lead">We have the right talent just for you</p>
         </div>
-        <div className="d-flex">
-          <Form.Select size="lg"   onChange={changeItemPerPage} >
-            {new Array(10).fill(0).map((_, i) => {
-              var item = i + 1
-              if (currentItemPerPage == item) {
-                return <option selected> {i + 1} </option>
+        <div className="float-right mt-4 me-3">
+          <div className='d-flex'>
+            <Form.Select className='fit-content me-2' onChange={changeItemPerPage} >
+              {new Array(10).fill(0).map((_, i) => {
+                var item = i + 1
+                if (currentItemPerPage == item) { 
+                  return <option selected> {i + 1} </option>
+                }
+                return <option> {item} </option>
+              })
               }
-              return <option> {item} </option>
-            })
-            }
-          </Form.Select>
-          <Form.Control size="lg" type="text" onKeyUp={search} placeholder="Search by job title, years of experience, city, country" />
-
-        </div>
+            </Form.Select>
+            <Form.Control className='fit-content' type="text" onKeyUp={search} placeholder="Search by job title, years of experience, city, country" />
+          </div>
+          </div>
       </header>
 
-      <section className='container w-80 m-auto'>
+      <section className='container w-80 m-auto mb-4'>
         <Nav
           activeKey="/home"
         >
           {routes.map(({ path, prop }, key) => (
 
             <Nav.Item key={key} className={location.pathname == path ? 'activeNav' : ''} >
-               <Link  className="nav-link" to={path}>{prop.pageName.toUpperCase()}</Link>
+              <Link className="nav-link" to={path}>{prop.pageName.toUpperCase()}</Link>
             </Nav.Item>
 
           )
@@ -80,7 +81,7 @@ const App: React.FC = (props) => {
       <section className='container w-80 m-auto'>
 
         <Routes>
-          {routes.map(({ Component, path, prop}, key) =>
+          {routes.map(({ Component, path, prop }, key) =>
             <Route key={key} path={path} element={<Component {...prop} />} />)}
 
         </Routes>

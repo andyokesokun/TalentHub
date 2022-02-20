@@ -46,7 +46,7 @@ li.nav-link {
 }
 
 .icon {
-  color: #0b34a5;
+  color: #252525;
 }
 
 .site-title {
@@ -91,7 +91,7 @@ li.nav-link {
 .btn {
   background-color: unset;
   border: 1px solid #53535317;
-  color: blue;
+  color: #646464;
   padding: 0.3rem;
   border-radius: 0.4rem;
 }
@@ -170,6 +170,10 @@ a.btn-link {
 .display-6 {
   font-size: calc(1.1rem + 1.2vw);
   font-weight: 200;
+}
+
+.fit-content {
+  width: fit-content;
 }
 
 /*# sourceMappingURL=utils.css.map */
